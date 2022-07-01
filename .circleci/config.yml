@@ -43,7 +43,7 @@ jobs:
       - checkout
       - run:
           name: "Make directory"
-          command: mk dir -p saver
+          command: mkdir -p saver
       - run:
           name: "Hello To File"
           command: echo "Hello Doks, just trying to persist data" > saver/output.txt
