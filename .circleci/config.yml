@@ -35,16 +35,43 @@ jobs:
       - run:
           name: "dev name"
           command: "echo $DEV_NAME"
+  
+  save-hello-world-output:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - checkout
+      - run:
+          name: "Make directory"
+          command: mk dir -p saver
+      - run:
+          name: "Hello To File"
+          command: echo "Hello Doks, just trying to persist data" > saver/output.txt
+      - persist_to_workspace:
+          root: saver
+          paths:
+            - saver/output.txt
+
+  print-output-file:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - checkout
+      - attach_workspace:
+          at: saver
+      - run:
+          name: "Read From File"
+          command: cat saver/output.txt
+
+
+
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
   say-hello-world-workflow:
     jobs:
-      - say-hello
-      - print-world:
+      - save-hello-world-output
+      - print-output-file:
           requires:
-            - say-hello
-      - print-dev-name:
-          requires:
-            - print-world
+            - save-hello-world-output
