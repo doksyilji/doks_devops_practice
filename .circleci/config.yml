@@ -50,7 +50,7 @@ jobs:
       - persist_to_workspace:
           root: saver
           paths:
-            - saver/output.txt
+            - output.txt
 
   print-output-file:
     docker:
@@ -61,7 +61,7 @@ jobs:
           at: saver
       - run:
           name: "Read From File"
-          command: cat saver/output.txt
+          command: cat output.txt
 
 
 
