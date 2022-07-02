@@ -61,7 +61,11 @@ jobs:
           at: saver
       - run:
           name: "Read From File"
-          command: cat saver/output.txt
+          command: cat saver/output2.txt
+      - run:
+          name: "Error Handler"
+          command: echo "Could not output file, could be due to failure to find or read file check your print-out-file job"
+          when: on_fail
 
 
 
