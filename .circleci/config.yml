@@ -61,7 +61,7 @@ jobs:
           at: saver
       - run:
           name: "Read From File"
-          command: cat output.txt
+          command: cat saver/output.txt
 
 
 
